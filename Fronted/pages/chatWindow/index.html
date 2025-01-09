@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat App</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <div class="left" >
+        <div class="top">
+          <div class="user active">
+            <h3>User</h3>
+          </div>
+          <div class="group">
+            <h3>Groups</h3>
+          </div>
+        </div>
+        <div class="bottom">
+         
+         
+        </div>
+        <div class="groupBottom">
+          
+        </div>
+      </div>
+      <div class="chat-container">
+        <div class="addmembercontainer">
+            <h3>add member</h3>
+
+            <div class="memberbox">
+              
+            </div>
+        </div>
+
+        <form action="">
+          <input type="text" placeholder="Enter group name..">
+          <button type="button">create group</button>
+          
+
+        </form>
+
+        <header class="chat-header">
+          <button class="create-group" >Create Group</button>
+          <button type="button " class="addmemberbtn" >add member</button>
+        <h1>------</h1>
+      </header>
+        <div class="chat-messages">
+          
+        </div>
+        <div class="chat-input">
+          <input type="text" id="chat" placeholder="Type a message..." />
+          <button id="send">Send</button>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
