@@ -552,6 +552,8 @@ fileInput.addEventListener("change", (e) => {
 
 imgSendBtn.addEventListener("click", async (e) => {
   e.preventDefault()
+  console.log(e)
+  console.log("imgsend btn")
   if (!selectedFile) {
     return alert("File is not selected");
   }
@@ -571,11 +573,11 @@ async function uploadFile() {
       formData
     );
 
-    if (response.status == 200) {
-      alert("img send successfully");
-      imgShowBOx.style.display = 'none'
-      console.log(response.data.data);
-    }
+    // if (response.status == 200) {
+    //   alert("img send successfully");
+    //   // imgShowBOx.style.display = 'none'
+    //   console.log(response.data.data);
+    // }
 
 
   } catch (error) {
