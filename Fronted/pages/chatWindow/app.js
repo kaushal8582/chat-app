@@ -173,15 +173,14 @@ GroupSectionBtn.addEventListener("click", () => {
   createGroupBtn.style.display = "block";
 });
 
-// createGroupBtn.addEventListener("click", () => {
-//   createGroupForm.style.display = "block";
-// });
+createGroupBtn.addEventListener("click", () => {
+  createGroupForm.style.display = "block";
+});
 
-// createGroupFormsubmitBtn.addEventListener("click", () => {
-
-//   let groupName = createGroupFormInput.value;
-//   createGroup(groupName);
-// });
+createGroupFormsubmitBtn.addEventListener("click", () => {
+  let groupName = createGroupFormInput.value;
+  createGroup(groupName);
+});
 
 async function createGroup(name) {
   let sender = localStorage.getItem("loginid");
@@ -551,34 +550,34 @@ fileInput.addEventListener("change", (e) => {
 //   uploadFile();
 // });
 
-// imgSendBtn.addEventListener("click", async (e) => {
-//   e.preventDefault();
-//   if (!selectedFile) {
-//     return alert("File is not selected");
-//   }
-//   // uploadFile();
-// });
+imgSendBtn.addEventListener("click", async (e) => {
+  e.preventDefault()
+  if (!selectedFile) {
+    return alert("File is not selected");
+  }
+  uploadFile();
+});
 
-async function uploadFile(e) {
-  e.preventDefault();
+async function uploadFile() {
   const formData = new FormData();
   formData.append("img", selectedFile);
   // console.log(formData)
 
-  console.log("form data to", formData);
+  console.log("form data to",formData);
   try {
-    console.log("something good for you");
-    // await axios.post("http://localhost:3000/group/upload-img", formData, {
-    //   headers: {
-    //     "Content-Type": "multipart/form-data", // Set this to multipart/form-data
-    //   },
-    // });
+    console.log("something")
+    const response = await axios.post(
+      "http://localhost:3000/group/upload-img",
+      formData
+    );
 
-    // if (response.status == 200) {
-    //   alert("img send successfully");
-    //   imgShowBOx.style.display = 'none'
-    //   console.log(response.data.data);
-    // }
+    if (response.status == 200) {
+      alert("img send successfully");
+      imgShowBOx.style.display = 'none'
+      console.log(response.data.data);
+    }
+
+
   } catch (error) {
     console.log(error);
   }
@@ -587,6 +586,8 @@ async function uploadFile(e) {
 // window.onbeforeunload = function () {
 //   alert("Page is about to reload");
 // };
+
+
 
 sendBtn.addEventListener("click", async () => {
   if (selectedFile) {
