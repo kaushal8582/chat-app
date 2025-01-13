@@ -77,6 +77,9 @@ module.exports.getAllUsers = async (req, res) => {
       const users = await User.findAll({
         attributes: ["id", "name", "email"], 
       });
+
+
+    //   console.log(users)
   
       return res.status(200).json({ message: "Users fetched successfully!", data: users });
     } catch (error) {

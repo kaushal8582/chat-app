@@ -3,7 +3,8 @@ const Group = require("../models/group.models");
 const GroupMessage = require("../models/message.model");
 const UserGroup = require("../models/UsersGroups.model");
 const Database = require("../utils/database");
-const User = require("../models/user.model")
+const User = require("../models/user.model");
+const uploadOnCloudinary = require("../utils/cloudinary");
 
 module.exports.createGroup = async (req, res) => {
   const t = await Database.transaction();
@@ -121,30 +122,30 @@ module.exports.getGroups = async (req, res) => {
   }
 };
 
-module.exports.sendMessage = async (req, res) => {
-  const { groupId, senderId, msg } = req.body;
-  if (!groupId || !senderId || !msg) {
-    return res.status(404).json({ message: "all fields are required" });
-  }
+// module.exports.sendMessage = async (req, res) => {
+//   const { groupId, senderId, msg } = req.body;
+//   if (!groupId || !senderId || !msg) {
+//     return res.status(404).json({ message: "all fields are required" });
+//   }
 
-  try {
-    const messageSend = await GroupMessage.create({
-      groupId,
-      senderId,
-      content: msg,
-    });
+//   try {
+//     const messageSend = await GroupMessage.create({
+//       groupId,
+//       senderId,
+//       content: msg,
+//     });
 
-    if (!messageSend) {
-      return res
-        .status(500)
-        .json({ message: "something went wrong while send message" });
-    }
+//     if (!messageSend) {
+//       return res
+//         .status(500)
+//         .json({ message: "something went wrong while send message" });
+//     }
 
-    return res.status(200).json({ message: "send" });
-  } catch (error) {
-    console.log(error);
-  }
-};
+//     return res.status(200).json({ message: "send" });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 module.exports.getGroupMessage = async (req, res) => {  
   const { groupId } = req.body;
@@ -260,8 +261,8 @@ module.exports.notInGroupMember = async(req,res)=>{
   }
 }
 
-
-
+ 
+ 
 module.exports.removeMember = async(req,res)=>{
   const {groupid,userid} = req.body;
 
@@ -307,6 +308,33 @@ module.exports.makeAdmin = async(req,res)=>{
     }
 
     res.status(200).json({message:"successfully make admin"});
+
+  } catch (error) {
+    console.log(error)
+  }
+
+
+}
+
+
+module.exports.uploadFile = async(req,res)=>{
+  const media = req.files?.img[0]?.path
+
+  try {
+    if(!media){
+      return res.status(404).json({message:"media is required"});
+    }    
+
+   const uploadMedia =  await uploadOnCloudinary(media) // url
+
+   if(!uploadMedia){
+    return res.status(500).json({message:"something went wrong while uploading file"});
+   }
+
+   console.log("done")
+
+    res.status(200).json({message:"successfully upload"});
+
 
   } catch (error) {
     console.log(error)

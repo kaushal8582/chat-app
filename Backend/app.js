@@ -1,6 +1,8 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
+const {createServer} = require("http")
+const{Server} = require("socket.io")
 const cors = require("cors");
 
 dotenv.config();
@@ -14,11 +16,31 @@ const User = require("./models/user.model");
 const Chat = require("./models/chat.model")
 const Group = require("./models/group.models")
 const UserGroup = require("./models/UsersGroups.model")
-const Message = require("./models/message.model")
+const Message = require("./models/message.model");
+const socketHandler = require("./socket/socketHandler");
 
 const app = express();
 
-app.use(cors());
+const server = createServer(app);
+const io = new Server(server,{
+  cors:{
+    origin:'*',
+    credentials:true,
+    methods:["GET","POST"]
+  }
+})
+
+
+
+socketHandler(io);
+
+app.use(cors({
+  origin:'*',
+  credentials:true,
+  methods:["GET","POST"]
+}));
+
+
 app.use(bodyParser.json());
 
 app.use("/user", userRoute);
@@ -49,7 +71,7 @@ Message.belongsTo(User,{foreignKey:"senderId"})
 database
   .sync()
   .then((re) => {
-    app.listen(process.env.PORT || 4000, () => {
+    server.listen(process.env.PORT || 3000, () => {
       console.log("Server is started");
     });
   })
@@ -57,6 +79,4 @@ database
     console.log(error);
   });
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log("Server is started");
-});
+

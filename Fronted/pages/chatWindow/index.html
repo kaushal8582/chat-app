@@ -8,7 +8,7 @@
   </head>
   <body>
     <main>
-      <div class="left" >
+      <div class="left">
         <div class="top">
           <div class="user active">
             <h3>User</h3>
@@ -17,46 +17,55 @@
             <h3>Groups</h3>
           </div>
         </div>
-        <div class="bottom">
-         
-         
-        </div>
-        <div class="groupBottom">
-          
-        </div>
+        <div class="bottom"></div>
+        <div class="groupBottom"></div>
       </div>
       <div class="chat-container">
         <div class="addmembercontainer">
-            <h3>add member</h3>
+          <h3>add member</h3>
 
-            <div class="memberbox">
-              
-            </div>
+          <div class="memberbox"></div>
         </div>
 
-        <form action="">
-          <input type="text" placeholder="Enter group name..">
-          <button type="button">create group</button>
-          
-
-        </form>
+        <!-- <form >
+          <input type="text" placeholder="Enter group name.." />
+          <button type="submit">create group</button>
+        </form> -->
 
         <header class="chat-header">
-          <button class="create-group" >Create Group</button>
-          <button type="button " class="addmemberbtn" >add member</button>
-        <h1>------</h1>
-      </header>
-        <div class="chat-messages">
-          
-        </div>
+          <button class="create-group">Create Group</button>
+          <button type="button " class="addmemberbtn">add member</button>
+          <h1>------</h1>
+        </header>
+
+
+        <form class="demoImgShow" onsubmit="uploadFile(e)" >
+          <img
+            src=""
+            alt=""
+          />
+          <button type="submit" >send</button>
+        </form>
+
+        
+        <div class="chat-messages"></div>
         <div class="chat-input">
-          <input type="text" id="chat" placeholder="Type a message..." />
+          <div>
+            <input
+              class="file"
+              hidden
+              type="file"
+              accept="image/*,video/*,.pdf"
+            />
+            <button class="send-file">send file</button>
+            <input type="text" id="chat" placeholder="Type a message..." />
+          </div>
           <button id="send">Send</button>
         </div>
       </div>
     </main>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
